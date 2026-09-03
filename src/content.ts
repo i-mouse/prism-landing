@@ -20,6 +20,11 @@ export const content = {
   },
   liveAuditDemo: {
     header: "LIVE AUDIT DEMO",
+    steps: {
+      extractor: { title: "Extractor", desc: "Extracting claim...", label: "Claim:" },
+      auditor: { title: "Auditor", desc: "Reasoning..." },
+      verdict: { title: "Verdict", desc: "Final label and evidence" }
+    },
     examples: [
       {
         claimNum: "1 of 3",
@@ -27,7 +32,7 @@ export const content = {
         auditorText: "Searching for direct evidence in the paper... Table 2 shows ReAct eliminates CoT's hallucination failure mode (56% -> 0%) but increases reasoning errors (16% -> 47%). Overall HotpotQA accuracy is lower than CoT (27.4 vs 29.4 EM). Evidence is incomplete.",
         auditorHighlight: "Evidence is incomplete.",
         verdict: "PARTIALLY SUPPORTED",
-        verdictColor: "partial",
+        verdictColor: "partial" as const,
         ref: "Section 3.3 · Table 1 · Table 2",
       },
       {
@@ -36,7 +41,7 @@ export const content = {
         auditorText: "Checking Table 1 for GSM8K results... PaLM 540B with CoT scores 56.9% on GSM8K, beating the prior best of 55% (fine-tuned GPT-3). Direct evidence in the table confirms the claim.",
         auditorHighlight: "Direct evidence in the table confirms the claim.",
         verdict: "SUPPORTED",
-        verdictColor: "supported",
+        verdictColor: "supported" as const,
         ref: "Section 3.2 · Table 1",
       },
       {
@@ -45,7 +50,7 @@ export const content = {
         auditorText: "Scanning experiments section for RL baseline comparisons... Paper only compares Reflexion against other frozen-LLM prompting techniques (ReAct, CoT). No traditional RL agent is benchmarked. Claim not supported by experimental evidence.",
         auditorHighlight: "Claim not supported by experimental evidence.",
         verdict: "NOT SUPPORTED",
-        verdictColor: "refused",
+        verdictColor: "refused" as const,
         ref: "Abstract vs Section 4",
       }
     ]
@@ -80,10 +85,11 @@ export const content = {
     paperTextStart: "Table 1 shows ReAct (27.4 EM) ",
     paperHighlight: "outperforms Act (25.7 EM) on HotpotQA",
     paperTextEnd: " under PaLM-540B.",
+    paperFooterText: "p. 7 of 14",
     verdictCards: [
-      { verdict: "SUPPORTED", color: "supported", ref: "Section 3.3 · Table 1", text: "ReAct outperforms Act baseline on HotpotQA (27.4 vs 25.7 EM)" },
-      { verdict: "PARTIALLY SUPPORTED", color: "partial", ref: "Section 4 · Table 3", text: "ReAct beats ReAct-IM overall (71 vs 53) but loses on Clean task" },
-      { verdict: "NOT SUPPORTED", color: "refused", ref: "Abstract vs Table 1", text: "Abstract claims 'effectiveness over SOTA baselines' but supervised SoTA scores 67.5 EM vs ReAct 27.4 EM on HotpotQA" }
+      { verdict: "SUPPORTED", color: "supported" as const, ref: "Section 3.3 · Table 1", text: "ReAct outperforms Act baseline on HotpotQA (27.4 vs 25.7 EM)" },
+      { verdict: "PARTIALLY SUPPORTED", color: "partial" as const, ref: "Section 4 · Table 3", text: "ReAct beats ReAct-IM overall (71 vs 53) but loses on Clean task" },
+      { verdict: "NOT SUPPORTED", color: "refused" as const, ref: "Abstract vs Table 1", text: "Abstract claims 'effectiveness over SOTA baselines' but supervised SoTA scores 67.5 EM vs ReAct 27.4 EM on HotpotQA" }
     ]
   },
   upload: {
@@ -93,6 +99,7 @@ export const content = {
     dropzoneMain: "Drop your PDF here",
     dropzoneSub: "or click to browse",
     dropzoneNote: "Up to 50MB · PDF only",
+    linkText: "→ opens the live demo in a new tab",
     linkHref: "https://prism-ai-reactui.nicesky-c6f0b846.centralindia.azurecontainerapps.io/"
   },
   wontDo: {
@@ -107,8 +114,9 @@ export const content = {
     paragraph: "That's a different job. Prism is for auditing the paper you're already reading."
   },
   limitations: {
-    eyebrow: "LIMITATIONS",
+    eyebrow: "SCOPE & LIMITATIONS",
     heading: "What this number doesn't prove.",
+    subhead: "Prism is designed with strict boundaries to ensure the integrity of the audit.",
     blocks: [
       "The three eval papers are well known and likely in the model's training data. Correct refusal here may partly reflect memorisation. A held-out post-cutoff paper with sealed rows is the fix.",
       "Refusal rate fell from 93% to 71% after a grounding change. The cause was better coverage, not worse grounding: the extractor now surfaces trap claims instead of silently skipping them. The lower number is the more honest one.",
@@ -142,8 +150,14 @@ export const content = {
     taglines: ["Built for researchers.", "Built for truth."],
     copyright: "© 2026 Prism",
     columns: [
-      { title: "Product", links: ["Live audit", "Accuracy", "How it works"] },
-      { title: "Resources", links: ["Method", "Eval set", "Documentation"] }
+      { 
+        title: "Navigation", 
+        links: [
+          { label: "Home", href: "#top" },
+          { label: "Git Prism repo", href: "https://github.com/i-mouse/prism" },
+          { label: "Live App", href: "https://prism-ai-reactui.nicesky-c6f0b846.centralindia.azurecontainerapps.io/" }
+        ] 
+      }
     ]
   }
 };

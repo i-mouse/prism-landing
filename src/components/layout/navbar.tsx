@@ -1,7 +1,8 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { content } from "@/content";
 
@@ -11,9 +12,9 @@ function PrismLogo() {
       <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_2px_8px_rgba(249,115,22,0.3)]">
         <defs>
           <linearGradient id="prism-grad-nav" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#ec4899" />
-            <stop offset="50%" stopColor="#f97316" />
-            <stop offset="100%" stopColor="#fbbf24" />
+            <stop offset="0%" stopColor="var(--color-pink-500)" />
+            <stop offset="50%" stopColor="var(--color-orange-500)" />
+            <stop offset="100%" stopColor="var(--color-amber-400)" />
           </linearGradient>
         </defs>
         <path d="M 50 15 L 85 85 L 15 85 Z" fill="none" stroke="url(#prism-grad-nav)" strokeWidth="14" strokeLinejoin="round" />
@@ -24,24 +25,27 @@ function PrismLogo() {
 
 export function Navbar() {
   const { scrollY } = useScroll();
-  const navBackground = useTransform(scrollY, [0, 50], ["rgba(9, 9, 11, 0)", "rgba(9, 9, 11, 0.9)"]);
-  const navBorder = useTransform(scrollY, [0, 50], ["rgba(39, 39, 42, 0)", "rgba(39, 39, 42, 1)"]);
-  const navPadding = useTransform(scrollY, [0, 50], ["1.5rem", "1rem"]);
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 50);
+  });
 
   return (
     <motion.nav 
-      style={{ backgroundColor: navBackground, borderColor: navBorder, paddingTop: navPadding, paddingBottom: navPadding }}
-      className="fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-md px-6 transition-all"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 ${
+        isScrolled ? "bg-background/90 border-b border-border backdrop-blur-md py-4" : "bg-transparent border-transparent py-6"
+      }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto flex flex-row items-center justify-between">
         <div className="flex items-center gap-3">
           <PrismLogo />
-          <span className="font-bold text-lg tracking-tight text-white">{content.nav.logo}</span>
+          <span className="font-bold text-lg tracking-tight text-foreground">{content.nav.logo}</span>
         </div>
         <div className="hidden lg:flex items-center gap-8">
-          <div className="flex items-center gap-6 text-[13px] font-mono font-medium text-zinc-400">
+          <div className="flex items-center gap-6 text-[13px] font-mono font-medium text-muted-foreground">
             {content.nav.links.map(link => (
-              <Link key={link.label} href={link.href} className="hover:text-white transition-colors">
+              <Link key={link.label} href={link.href} className="hover:text-foreground transition-colors">
                 {link.label}
               </Link>
             ))}

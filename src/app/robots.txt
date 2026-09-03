@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prism-ai-reactui.nicesky-c6f0b846.centralindia.azurecontainerapps.io/sitemap.xml

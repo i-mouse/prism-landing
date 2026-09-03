@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export function ScatteredRects({ offset = 0 }: { offset?: number }) {
+  const prefersReducedMotion = useReducedMotion();
   // Fewer boxes (only 4 per section), spaced far apart, with prime/irregular durations 
   // so they almost never sync up their animations.
   const rects = [
@@ -14,6 +15,10 @@ export function ScatteredRects({ offset = 0 }: { offset?: number }) {
     { top: "25%", right: "5%", w: "w-40", h: "h-8", color: "bg-emerald-500/10 border-emerald-500/20", delay: 1.8 + offset, dur: 13.7 },
     { bottom: "30%", right: "3%", w: "w-28", h: "h-10", color: "bg-amber-500/10 border-amber-500/20", delay: 5.1 + offset, dur: 8.9 },
   ];
+
+  if (prefersReducedMotion) {
+    return null; // hide distracting rects if user prefers reduced motion
+  }
 
   return (
     <div className="absolute inset-0 pointer-events-none z-0 hidden lg:block overflow-hidden">

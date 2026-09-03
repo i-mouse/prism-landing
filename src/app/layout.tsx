@@ -16,6 +16,19 @@ const jetBrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Prism - AI research-paper claim-auditing tool",
   description: "The only tool that tells you what a paper doesn't prove.",
+  metadataBase: new URL("https://prism-ai-reactui.nicesky-c6f0b846.centralindia.azurecontainerapps.io/"),
+  openGraph: {
+    title: "Prism",
+    description: "The only tool that tells you what a paper doesn't prove.",
+    url: "https://prism-ai-reactui.nicesky-c6f0b846.centralindia.azurecontainerapps.io/",
+    siteName: "Prism",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Prism",
+    description: "The only tool that tells you what a paper doesn't prove.",
+  },
 };
 
 export default function RootLayout({

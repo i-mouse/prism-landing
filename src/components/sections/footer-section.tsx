@@ -1,5 +1,3 @@
-"use client";
-
 import { content } from "@/content";
 import { Code, Network } from "lucide-react";
 import { ScatteredRects } from "@/components/scattered-rects";
@@ -19,9 +17,9 @@ function PrismLogo() {
       <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_2px_8px_rgba(249,115,22,0.3)]">
         <defs>
           <linearGradient id="prism-grad-footer" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#ec4899" />
-            <stop offset="50%" stopColor="#f97316" />
-            <stop offset="100%" stopColor="#fbbf24" />
+            <stop offset="0%" stopColor="var(--color-pink-500)" />
+            <stop offset="50%" stopColor="var(--color-orange-500)" />
+            <stop offset="100%" stopColor="var(--color-amber-400)" />
           </linearGradient>
         </defs>
         <path d="M 50 15 L 85 85 L 15 85 Z" fill="none" stroke="url(#prism-grad-footer)" strokeWidth="14" strokeLinejoin="round" />
@@ -32,24 +30,24 @@ function PrismLogo() {
 
 export function FooterSection() {
   return (
-    <div className="bg-[#09090b]">
+    <div className="bg-background">
       
       {/* Engineering Section */}
-      <section className="py-20 px-6 border-t border-zinc-900/50 relative overflow-hidden">
+      <section className="py-20 px-6 border-t border-border relative overflow-hidden">
         <ScatteredRects offset={4.7} />
         
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-zinc-900 relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-border relative z-10">
           {content.engineering.map((item, i) => (
             <div key={i} className="flex-1 flex gap-5 px-0 py-10 md:py-0 md:px-10 first:pl-0 last:pr-0">
-              <div className="w-14 h-14 shrink-0 rounded-lg border border-cyan-500/30 bg-[#0d0d0f] flex items-center justify-center text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.1)]">
+              <div className="w-14 h-14 shrink-0 rounded-lg border border-cyan-200 dark:border-cyan-500/30 bg-cyan-50 dark:bg-card flex items-center justify-center text-cyan-600 dark:text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.1)]">
                 {item.icon === 'code' && <Code size={24} />}
                 {item.icon === 'network' && <Network size={24} />}
                 {item.icon === 'github' && <GithubIcon size={24} />}
               </div>
               <div className="flex flex-col">
-                <span className="text-cyan-400 text-[12px] font-mono tracking-widest uppercase mb-3">{item.eyebrow}</span>
-                <p className="text-zinc-400 text-[13px] leading-relaxed mb-6 font-mono">{item.heading}</p>
-                <a href={item.linkHref} className="font-mono text-[13px] text-red-500 border-b border-red-500/30 pb-0.5 self-start hover:text-red-400 hover:border-red-400 transition-colors">
+                <span className="text-cyan-700 dark:text-cyan-400 text-[13px] md:text-[14px] font-mono tracking-widest uppercase mb-3">{item.eyebrow}</span>
+                <p className="text-muted-foreground text-[13px] leading-relaxed mb-6 font-mono">{item.heading}</p>
+                <a href={item.linkHref} className="font-mono text-[13px] text-red-600 dark:text-red-500 border-b border-red-600/30 dark:border-red-500/30 pb-0.5 self-start hover:text-red-500 dark:hover:text-red-400 transition-colors">
                   {item.linkText}
                 </a>
               </div>
@@ -58,34 +56,25 @@ export function FooterSection() {
         </div>
       </section>
 
-      {/* Site Footer - NO SCATTERED RECTS HERE */}
-      <footer className="py-16 px-6 border-t border-zinc-900/50 min-h-[300px]">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
-          <div className="flex flex-col gap-6 max-w-xs">
-            <div className="flex items-center gap-4">
+      {/* Site Footer */}
+      <footer className="py-8 px-6 border-t border-border">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Brand & Copyright */}
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+            <div className="flex items-center gap-3">
               <PrismLogo />
-              <span className="font-bold text-2xl tracking-tight text-white">Prism</span>
+              <span className="font-bold text-xl tracking-tight text-foreground">Prism</span>
             </div>
-            <div className="font-mono text-[12px] text-zinc-400 leading-relaxed mt-2">
-              {content.footer.taglines.map((tagline, i) => (
-                <div key={i}>{tagline}</div>
-              ))}
-            </div>
-            <div className="text-[11px] text-zinc-600 mt-auto pt-8 font-mono">{content.footer.copyright}</div>
+            <div className="hidden md:block w-px h-6 bg-border"></div>
+            <div className="text-[12px] text-muted-foreground font-mono">{content.footer.copyright}</div>
           </div>
           
-          <div className="grid grid-cols-2 gap-16 flex-1 md:max-w-md md:ml-auto">
-            {content.footer.columns.map((col, i) => (
-              <div key={i} className="flex flex-col gap-5">
-                <span className="text-white font-bold text-[13px]">{col.title}</span>
-                <ul className="flex flex-col gap-4">
-                  {col.links.map((link, j) => (
-                    <li key={j}>
-                      <a href="#" className="text-zinc-500 hover:text-white text-[13px] transition-colors">{link}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          {/* Compact Navigation */}
+          <div className="flex items-center gap-6">
+            {content.footer.columns[0].links.map((link, j) => (
+              <a key={j} href={link.href} className="text-muted-foreground hover:text-foreground text-[13px] transition-colors font-medium">
+                {link.label}
+              </a>
             ))}
           </div>
         </div>

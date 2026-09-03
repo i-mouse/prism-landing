@@ -39,7 +39,7 @@ export function HowItWorksSection() {
               ))}
             </div>
             <div className="mt-14 ml-14">
-              <a href="#" className="font-sans font-medium text-[15px] text-brand border-b border-brand/50 pb-0.5 hover:text-orange-600 hover:border-orange-600 transition-colors">
+              <a href="#live-audit" className="font-sans font-medium text-[15px] text-brand border-b border-brand/50 pb-0.5 hover:text-orange-600 hover:border-orange-600 transition-colors">
                 {content.howItWorks.link}
               </a>
             </div>
@@ -68,7 +68,7 @@ export function HowItWorksSection() {
                   <div className="h-2 bg-zinc-200 rounded w-4/5"></div>
                 </div>
               </div>
-              <div className="pt-10 text-[12px] text-zinc-400 font-mono">p. 7 of 14</div>
+              <div className="pt-10 text-[12px] text-zinc-500 font-mono">{content.howItWorks.paperFooterText}</div>
             </motion.div>
 
             {/* Rail */}
@@ -83,10 +83,12 @@ export function HowItWorksSection() {
                   transition={{ duration: 0.5, delay: 0.3 + (i * 0.1) }}
                   className="relative pl-8"
                 >
-                  <div className={`absolute left-0 top-3 w-5 h-5 rounded-full border-4 border-white ${card.color === 'supported' ? 'bg-supported' : card.color === 'partial' ? 'bg-partial' : 'bg-refused'}`}></div>
+                  <div className={`absolute left-0 top-3 w-5 h-5 rounded-full border-4 border-white ${card.color === 'supported' ? 'bg-supported' : card.color === 'partial' ? 'bg-partial' : 'bg-refused'}`}>
+                    <span className="sr-only">Verdict: {card.verdict}</span>
+                  </div>
                   <div className="bg-white border border-zinc-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
                     <div className="mb-3">
-                      <VerdictPill label={card.verdict} color={card.color as any} />
+                      <VerdictPill label={card.verdict} color={card.color} />
                     </div>
                     <div className="font-mono text-[12px] text-zinc-500 mb-2.5 font-medium">{card.ref}</div>
                     <p className="text-[14px] font-mono text-zinc-800 leading-snug">{card.text}</p>

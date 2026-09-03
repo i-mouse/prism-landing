@@ -9,7 +9,7 @@ import { FooterSection } from "@/components/sections/footer-section";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-50 selection:bg-brand selection:text-white font-sans">
+    <main id="top" className="min-h-screen font-sans">
       <Navbar />
       <HeroSection />
       <WedgeSection />
