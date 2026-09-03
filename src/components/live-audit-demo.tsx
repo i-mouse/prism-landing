@@ -14,14 +14,14 @@ export function LiveAuditDemo() {
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % examples.length);
-    }, 8000);
+    }, 12000);
     return () => clearInterval(timer);
   }, []);
 
   const activeExample = examples[activeIndex];
 
   return (
-    <div className="w-full max-w-5xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+    <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
       {/* Left Column - Paper Claim */}
       <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden flex flex-col">
         <div className="p-4 border-b border-zinc-800 flex items-center gap-2">
@@ -108,22 +108,22 @@ export function LiveAuditDemo() {
             </div>
 
             {/* Stage 3 */}
-            <div className="relative flex flex-col gap-3">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 5 }} className="relative flex flex-col gap-3">
               <div className="absolute -left-9 top-1 w-6 h-6 rounded-full bg-zinc-950 border-2 border-rose-500 flex items-center justify-center text-xs font-mono text-rose-500 z-10">3</div>
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="text-rose-500 font-mono font-bold text-sm">Verdict</h4>
                   <p className="text-zinc-500 font-mono text-xs">Final label and evidence</p>
                 </div>
-                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 3 }}>
+                <div>
                   <VerdictPill label={activeExample.verdict} color={activeExample.verdictColor as any} />
-                </motion.div>
+                </div>
               </div>
               <div className="border border-zinc-800 rounded-lg p-4 font-mono text-sm flex justify-between items-center text-zinc-400 bg-zinc-900/50">
                 <span>{activeExample.ref}</span>
                 <ExternalLink size={14} />
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </AnimatePresence>
       </div>

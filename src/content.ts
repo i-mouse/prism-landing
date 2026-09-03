@@ -4,10 +4,7 @@ export const content = {
     links: [
       { label: "How it works", href: "#how-it-works" },
       { label: "Live audit", href: "#live-audit" },
-      { label: "Accuracy", href: "#accuracy" },
-      { label: "Method", href: "#method" },
       { label: "Limitations", href: "#limitations" },
-      { label: "Blog", href: "/blog/prism-v1" },
       { label: "GitHub", href: "https://github.com/i-mouse/prism" },
     ],
     cta: "Audit a paper — no account"
@@ -15,7 +12,11 @@ export const content = {
   hero: {
     headlineStart: "The only tool that tells you what a paper ",
     headlineHighlight: "doesn't prove.",
-    subhead: "Prism audits a paper's claims, finds the evidence, and refuses to affirm what the paper doesn't support."
+    subhead: "Prism audits a paper's claims, finds the evidence, and refuses to affirm what the paper doesn't support.",
+    ctaPrimary: "Audit a paper — no account",
+    ctaPrimarySub: "No signup · PDF only",
+    subheadLinkText: "Read the technical writeup →",
+    subheadLinkHref: "https://github.com/i-mouse/prism"
   },
   liveAuditDemo: {
     header: "LIVE AUDIT DEMO",
@@ -76,7 +77,7 @@ export const content = {
     ],
     link: "Read about our three-call architecture →",
     paperHeader: "3.3 ReAct Prompting",
-    paperTextStart: "Table 1 shows ",
+    paperTextStart: "Table 1 shows ReAct (27.4 EM) ",
     paperHighlight: "outperforms Act (25.7 EM) on HotpotQA",
     paperTextEnd: " under PaLM-540B.",
     verdictCards: [
@@ -142,8 +143,7 @@ export const content = {
     copyright: "© 2026 Prism",
     columns: [
       { title: "Product", links: ["Live audit", "Accuracy", "How it works"] },
-      { title: "Resources", links: ["Eval set", "Documentation"] },
-      { title: "Company", links: ["About", "Privacy", "Terms"] }
+      { title: "Resources", links: ["Method", "Eval set", "Documentation"] }
     ]
   }
 };
