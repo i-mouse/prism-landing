@@ -11,9 +11,9 @@ export function StatsSection() {
       </div>
       
       <div className="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
-        <div className="font-mono text-[80px] md:text-[120px] font-bold leading-none tracking-tighter mb-4 text-center inline-block">
+        <div className="font-mono text-[56px] sm:text-[80px] md:text-[120px] font-bold leading-none tracking-tighter mb-4 text-center inline-block">
           <span className="text-amber-500">{content.stats.mainNumberParts[0]}</span>
-          <span className="text-orange-500 mx-3">{content.stats.mainNumberParts[1]}</span>
+          <span className="text-orange-500 mx-2 md:mx-3">{content.stats.mainNumberParts[1]}</span>
           <span className="text-rose-500">{content.stats.mainNumberParts[2]}</span>
         </div>
         <p className="text-[14px] md:text-[15px] text-muted-foreground font-mono mb-12 max-w-lg mx-auto">

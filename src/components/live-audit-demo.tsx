@@ -32,12 +32,12 @@ export function LiveAuditDemo() {
     <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
       {/* Left Column - Paper Claim */}
       <div className="bg-card border border-border rounded-xl overflow-hidden flex flex-col">
-        <div className="p-4 border-b border-border flex items-center gap-2">
+        <div className="p-3 md:p-4 border-b border-border flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-brand"></div>
-          <span className="text-xs font-mono font-bold tracking-widest text-brand uppercase">{content.liveAuditDemo.header}</span>
+          <span className="text-[10px] md:text-xs font-mono font-bold tracking-widest text-brand uppercase">{content.liveAuditDemo.header}</span>
         </div>
-        <div className="p-8 flex-1 flex flex-col">
-          <div className="font-mono text-lg md:text-xl leading-relaxed text-foreground flex-1 min-h-[210px]">
+        <div className="p-5 md:p-8 flex-1 flex flex-col">
+          <div className="font-mono text-base md:text-xl leading-relaxed text-foreground flex-1 min-h-[160px] md:min-h-[210px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
@@ -46,18 +46,18 @@ export function LiveAuditDemo() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <p className="text-muted-foreground font-mono text-sm mb-6">// Claim {activeExample.claimNum}</p>
+                <p className="text-muted-foreground font-mono text-xs md:text-sm mb-4 md:mb-6">// Claim {activeExample.claimNum}</p>
                 <TypewriterText text={activeExample.claimText} delay={claimDelay} />
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
-        <div className="p-4 border-t border-border flex items-center justify-between text-muted-foreground font-mono text-xs bg-muted/50">
+        <div className="p-3 md:p-4 border-t border-border flex items-center justify-between text-muted-foreground font-mono text-[10px] md:text-xs bg-muted/50">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
             Watching live
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
             <button onClick={() => setActiveIndex((prev) => (prev - 1 + examples.length) % examples.length)} className="hover:text-zinc-300 transition-colors">
               <ChevronLeft size={16} />
             </button>
@@ -74,10 +74,10 @@ export function LiveAuditDemo() {
       </div>
 
       {/* Right Column - Audit Trail */}
-      <div className="flex-1 flex flex-col pt-12 relative h-full">
-        <div className="absolute left-[-16px] md:left-0 top-16 bottom-16 w-px bg-border/60"></div>
+      <div className="flex-1 flex flex-col pt-6 md:pt-12 relative h-full">
+        <div className="hidden md:block absolute left-0 top-16 bottom-16 w-px bg-border/60"></div>
         
-        <div className="flex-1 overflow-y-auto pr-2 pb-8 custom-scrollbar relative pl-8 md:pl-12 min-h-[520px]">
+        <div className="flex-1 overflow-y-auto pr-2 pb-4 md:pb-8 custom-scrollbar relative pl-0 md:pl-12 min-h-[400px] md:min-h-[520px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -85,28 +85,34 @@ export function LiveAuditDemo() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              className="flex flex-col gap-10"
+              className="flex flex-col gap-8 md:gap-10"
             >
               {/* Stage 1 */}
-              <div className="relative">
-                <div className="absolute -left-9 top-1 w-6 h-6 rounded-full bg-background border-2 border-amber-500 flex items-center justify-center text-xs font-mono text-amber-500 z-10">1</div>
-                <div className="mb-2">
-                  <h4 className="text-amber-500 font-mono font-bold text-sm">{content.liveAuditDemo.steps.extractor.title}</h4>
-                  <p className="text-muted-foreground font-mono text-xs">{content.liveAuditDemo.steps.extractor.desc}</p>
+              <div className="relative border md:border-0 border-border rounded-xl p-4 md:p-0 bg-card/50 md:bg-transparent">
+                <div className="hidden md:flex absolute -left-9 top-1 w-6 h-6 rounded-full bg-background border-2 border-amber-500 items-center justify-center text-xs font-mono text-amber-500 z-10">1</div>
+                <div className="flex items-center gap-2 md:block mb-2 md:mb-2">
+                  <div className="md:hidden w-5 h-5 rounded-full bg-background border border-amber-500 flex items-center justify-center text-[10px] font-mono text-amber-500">1</div>
+                  <div>
+                    <h4 className="text-amber-500 font-mono font-bold text-xs md:text-sm">{content.liveAuditDemo.steps.extractor.title}</h4>
+                    <p className="text-muted-foreground font-mono text-[10px] md:text-xs">{content.liveAuditDemo.steps.extractor.desc}</p>
+                  </div>
                 </div>
-                <div className="bg-card border border-border rounded-lg p-4 font-mono text-sm text-muted-foreground">
+                <div className="bg-card border border-border rounded-lg p-3 md:p-4 font-mono text-xs md:text-sm text-muted-foreground">
                   <span className="text-amber-500">{content.liveAuditDemo.steps.extractor.label}</span> {activeExample.claimText}
                 </div>
               </div>
 
               {/* Stage 2 */}
-              <div className="relative">
-                <div className="absolute -left-9 top-1 w-6 h-6 rounded-full bg-background border-2 border-emerald-500 flex items-center justify-center text-xs font-mono text-emerald-500 z-10">2</div>
-                <div className="mb-2">
-                  <h4 className="text-emerald-500 font-mono font-bold text-sm">{content.liveAuditDemo.steps.auditor.title}</h4>
-                  <p className="text-muted-foreground font-mono text-xs">{content.liveAuditDemo.steps.auditor.desc}</p>
+              <div className="relative border md:border-0 border-border rounded-xl p-4 md:p-0 bg-card/50 md:bg-transparent">
+                <div className="hidden md:flex absolute -left-9 top-1 w-6 h-6 rounded-full bg-background border-2 border-emerald-500 items-center justify-center text-xs font-mono text-emerald-500 z-10">2</div>
+                <div className="flex items-center gap-2 md:block mb-2 md:mb-2">
+                  <div className="md:hidden w-5 h-5 rounded-full bg-background border border-emerald-500 flex items-center justify-center text-[10px] font-mono text-emerald-500">2</div>
+                  <div>
+                    <h4 className="text-emerald-500 font-mono font-bold text-xs md:text-sm">{content.liveAuditDemo.steps.auditor.title}</h4>
+                    <p className="text-muted-foreground font-mono text-[10px] md:text-xs">{content.liveAuditDemo.steps.auditor.desc}</p>
+                  </div>
                 </div>
-                <div className="bg-card border border-border rounded-lg p-4 font-mono text-sm text-muted-foreground leading-relaxed h-[245px] overflow-y-auto custom-scrollbar">
+                <div className="bg-card border border-border rounded-lg p-3 md:p-4 font-mono text-xs md:text-sm text-muted-foreground leading-relaxed h-[200px] md:h-[245px] overflow-y-auto custom-scrollbar">
                   <TypewriterText 
                     text={activeExample.auditorText} 
                     delay={auditorDelay} 
@@ -117,20 +123,23 @@ export function LiveAuditDemo() {
               </div>
 
               {/* Stage 3 */}
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: verdictStart, duration: 0.5, ease: "easeOut" }} className="relative flex flex-col gap-3">
-              <div className="absolute -left-9 top-1 w-6 h-6 rounded-full bg-background border-2 border-rose-500 flex items-center justify-center text-xs font-mono text-rose-500 z-10">3</div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="text-rose-500 font-mono font-bold text-sm">{content.liveAuditDemo.steps.verdict.title}</h4>
-                  <p className="text-muted-foreground font-mono text-xs">{content.liveAuditDemo.steps.verdict.desc}</p>
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: verdictStart, duration: 0.5, ease: "easeOut" }} className="relative flex flex-col gap-3 border md:border-0 border-border rounded-xl p-4 md:p-0 bg-card/50 md:bg-transparent">
+              <div className="hidden md:flex absolute -left-9 top-1 w-6 h-6 rounded-full bg-background border-2 border-rose-500 items-center justify-center text-xs font-mono text-rose-500 z-10">3</div>
+              <div className="flex items-start md:items-center justify-between flex-col md:flex-row gap-3 md:gap-0">
+                <div className="flex items-center gap-2 md:block">
+                  <div className="md:hidden w-5 h-5 rounded-full bg-background border border-rose-500 flex items-center justify-center text-[10px] font-mono text-rose-500">3</div>
+                  <div>
+                    <h4 className="text-rose-500 font-mono font-bold text-xs md:text-sm">{content.liveAuditDemo.steps.verdict.title}</h4>
+                    <p className="text-muted-foreground font-mono text-[10px] md:text-xs">{content.liveAuditDemo.steps.verdict.desc}</p>
+                  </div>
                 </div>
                 <div>
                   <VerdictPill label={activeExample.verdict} color={activeExample.verdictColor} />
                 </div>
               </div>
-              <div className="border border-border rounded-lg p-4 font-mono text-sm flex justify-between items-center text-muted-foreground bg-muted/50">
-                <span>{activeExample.ref}</span>
-                <ExternalLink size={14} />
+              <div className="border border-border rounded-lg p-3 md:p-4 font-mono text-xs md:text-sm flex justify-between items-center text-muted-foreground bg-muted/50">
+                <span className="truncate mr-2">{activeExample.ref}</span>
+                <ExternalLink size={14} className="flex-shrink-0" />
               </div>
             </motion.div>
           </motion.div>

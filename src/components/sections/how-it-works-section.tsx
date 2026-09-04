@@ -46,14 +46,14 @@ export function HowItWorksSection() {
           </div>
 
           {/* Right side: Mock Paper + Verdicts */}
-          <div className="flex gap-8">
+          <div className="flex flex-col md:flex-row gap-8">
             {/* Paper Mockup */}
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="flex-1 max-w-sm bg-white border border-zinc-300 rounded-xl p-8 shadow-xl flex flex-col"
+              className="hidden md:flex flex-1 max-w-sm bg-white border border-zinc-300 rounded-xl p-8 shadow-xl flex-col"
             >
               <div className="flex-1">
                 <h4 className="font-bold font-mono text-[15px] mb-6 text-zinc-900">{content.howItWorks.paperHeader}</h4>
@@ -72,8 +72,8 @@ export function HowItWorksSection() {
             </motion.div>
 
             {/* Rail */}
-            <div className="w-64 flex flex-col gap-5 relative pt-12">
-              <div className="absolute left-[9px] top-0 bottom-0 w-px bg-zinc-200"></div>
+            <div className="w-full md:w-64 flex flex-col gap-5 relative pt-0 md:pt-12">
+              <div className="absolute left-[9px] top-0 bottom-0 w-px bg-zinc-200 hidden md:block"></div>
               {content.howItWorks.verdictCards.map((card, i) => (
                 <motion.div 
                   key={i}
@@ -81,9 +81,9 @@ export function HowItWorksSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.3 + (i * 0.1) }}
-                  className="relative pl-8"
+                  className="relative md:pl-8"
                 >
-                  <div className={`absolute left-0 top-3 w-5 h-5 rounded-full border-4 border-white ${card.color === 'supported' ? 'bg-supported' : card.color === 'partial' ? 'bg-partial' : 'bg-refused'}`}>
+                  <div className={`hidden md:block absolute left-0 top-3 w-5 h-5 rounded-full border-4 border-white ${card.color === 'supported' ? 'bg-supported' : card.color === 'partial' ? 'bg-partial' : 'bg-refused'}`}>
                     <span className="sr-only">Verdict: {card.verdict}</span>
                   </div>
                   <div className="bg-white border border-zinc-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">

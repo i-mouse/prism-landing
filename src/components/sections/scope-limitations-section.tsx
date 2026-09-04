@@ -20,7 +20,7 @@ export function ScopeLimitationsSection() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
           {/* Left Column - Scope Card */}
-          <div className="bg-card border border-border rounded-3xl p-8 lg:p-12 flex flex-col gap-8 shadow-xl relative group overflow-hidden">
+          <div className="bg-card border border-border rounded-3xl p-6 md:p-8 lg:p-12 flex flex-col gap-8 shadow-xl relative group overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-500/0 via-rose-500/50 to-rose-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
             <h3 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-3">
@@ -47,7 +47,7 @@ export function ScopeLimitationsSection() {
           </div>
 
           {/* Right Column - Limitations Card */}
-          <div className="bg-card border border-border rounded-3xl p-8 lg:p-12 flex flex-col gap-8 shadow-xl relative group overflow-hidden">
+          <div className="bg-card border border-border rounded-3xl p-6 md:p-8 lg:p-12 flex flex-col gap-8 shadow-xl relative group overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500/0 via-amber-500/50 to-amber-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
             <h3 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-3">

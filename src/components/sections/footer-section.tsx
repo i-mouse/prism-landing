@@ -1,6 +1,7 @@
 import { content } from "@/content";
 import { Code, Network } from "lucide-react";
 import { ScatteredRects } from "@/components/scattered-rects";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 function GithubIcon({ size = 24 }: { size?: number }) {
   return (
@@ -58,7 +59,7 @@ export function FooterSection() {
 
       {/* Site Footer */}
       <footer className="py-8 px-6 border-t border-border">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
           {/* Brand & Copyright */}
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
             <div className="flex items-center gap-3">
@@ -69,13 +70,18 @@ export function FooterSection() {
             <div className="text-[12px] text-muted-foreground font-mono">{content.footer.copyright}</div>
           </div>
           
-          {/* Compact Navigation */}
-          <div className="flex items-center gap-6">
-            {content.footer.columns[0].links.map((link, j) => (
-              <a key={j} href={link.href} className="text-muted-foreground hover:text-foreground text-[13px] transition-colors font-medium">
-                {link.label}
-              </a>
-            ))}
+          {/* Compact Navigation & Theme Toggle */}
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6">
+              {content.footer.columns[0].links.map((link, j) => (
+                <a key={j} href={link.href} className="text-muted-foreground hover:text-foreground text-[13px] transition-colors font-medium">
+                  {link.label}
+                </a>
+              ))}
+            </div>
+            <div className="flex items-center justify-center">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </footer>

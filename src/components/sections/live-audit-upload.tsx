@@ -17,13 +17,13 @@ export function LiveAuditUpload() {
         </div>
         
         {/* Right Side: Dropzone */}
-        <div className="flex-1 w-full max-w-sm">
+        <div className="flex-1 w-full md:max-w-sm">
           <a href={content.upload.linkHref} target="_blank" rel="noopener noreferrer" className="block w-full">
-            <div className="border border-border rounded-2xl bg-card py-10 px-8 flex flex-col items-center justify-center cursor-pointer hover:border-zinc-700 hover:bg-accent hover:shadow-xl hover:shadow-brand/10 transition-all group">
-              <UploadCloud size={40} className="text-muted-foreground group-hover:text-brand transition-colors mb-5 transform group-hover:scale-110 duration-300" />
-              <div className="text-[16px] font-bold text-foreground mb-2">{content.upload.dropzoneMain}</div>
-              <div className="text-[13px] text-muted-foreground mb-6">{content.upload.dropzoneSub}</div>
-              <div className="text-[11px] font-mono text-muted-foreground bg-background px-4 py-1.5 rounded mb-4">{content.upload.dropzoneNote}</div>
+            <div className="border border-border rounded-2xl bg-card py-8 px-6 md:py-10 md:px-8 flex flex-col items-center justify-center cursor-pointer hover:border-zinc-700 hover:bg-accent hover:shadow-xl hover:shadow-brand/10 transition-all group">
+              <UploadCloud size={40} className="text-muted-foreground group-hover:text-brand transition-colors mb-4 md:mb-5 transform group-hover:scale-110 duration-300" />
+              <div className="text-[15px] md:text-[16px] font-bold text-foreground mb-2 text-center">{content.upload.dropzoneMain}</div>
+              <div className="text-[12px] md:text-[13px] text-muted-foreground mb-5 md:mb-6 text-center">{content.upload.dropzoneSub}</div>
+              <div className="text-[10px] md:text-[11px] font-mono text-muted-foreground bg-background px-3 md:px-4 py-1.5 rounded mb-4 text-center">{content.upload.dropzoneNote}</div>
               <div className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold group-hover:text-foreground transition-colors">{content.upload.linkText}</div>
             </div>
           </a>
