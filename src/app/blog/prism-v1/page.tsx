@@ -61,7 +61,7 @@ export default function BlogPost() {
           <section className="space-y-4">
             <h2 className="text-2xl font-bold font-mono text-zinc-900 dark:text-zinc-100 mt-12 mb-4">The Eval and The Number</h2>
             <p>
-              Our golden set consists of 17 adversarial grounding-negative cases manually authored across three foundational LLM agent papers: Reflexion, Chain-of-Thought, and ReAct. We chose these papers because they are dense with empirical claims and represent the exact type of architecture literature our target audience reads.
+              Our golden set consists of 14 grounding-negative cases (out of 37 total claims) manually authored across three foundational LLM agent papers: Reflexion, Chain-of-Thought, and ReAct. We chose these papers because they are dense with empirical claims and represent the exact type of architecture literature our target audience reads.
             </p>
             <p>
               The golden set focuses heavily on trap claims—statements the authors make in the abstract or introduction that are explicitly contradicted or completely unsupported by their own data tables later in the text. For instance, a paper might claim in the abstract that its method generalizes to "any task that humans can solve via language," but the results section only tests arithmetic and simple coin-flip tasks. If Prism extracts that generalization claim and labels it "Supported," it has failed the audit.
@@ -78,7 +78,7 @@ export default function BlogPost() {
               <p>NOT SUPPORTED. Prism correctly catches that the abstract's broad superiority claim is refuted by the specific results table, and refuses to affirm it.</p>
             </div>
             <p>
-              Our current correct-refusal rate across these traps is <strong>[PLACEHOLDER: post-v4.1 correct-refusal rate]</strong>.
+              Our correct-refusal rate on these traps is <strong>11/14 (79%) refusal-family</strong>. This breaks down as 5 explicit <strong>by_label</strong> refusals, 6 <strong>by_omission</strong> (extractor never surfaced the trap), and 0 <strong>by_grounding_reject</strong>. Of the explicit refusals, <strong>3/14 (21%)</strong> are strict-label matches that landed on the exact expected tier. Both numbers matter: 79% is our safety property, while the gap to 21% represents ongoing work to make refusals precise instead of accidental.
             </p>
             <p>
               This evaluation suite acts as a strict CI gate for the repository. Any prompt, model, or retrieval change runs against this golden set before and after. A single grounding-negative FAIL blocks the change. 
@@ -104,7 +104,7 @@ export default function BlogPost() {
 
             <h3 className="text-xl font-bold font-mono text-zinc-800 dark:text-zinc-200 mt-8 mb-2">3. Postgres Entra Auth for Python</h3>
             <p>
-              Migrating to Entra ID (Managed Identity) auth on Azure Postgres worked seamlessly for the C# API, which auto-detected the identity and acquired tokens automatically. The Python worker, however, crashed on startup complaining about missing passwords. I assumed `psycopg` would handle token injection similarly to EF Core, but Python's raw `psycopg` connection requires the `PRISM_DB_USERNAME` to be explicitly set to the Entra principal name. The fix taught me that cross-language orchestration on Azure requires understanding exactly where the identity abstractions stop. We ported the fix by passing explicit `AddAzureUserAssignedIdentity` parameters down to the Python worker containers in our AppHost.
+              Migrating to Entra ID for service-to-database Managed Identity auth on Azure Postgres worked seamlessly for the C# API, which auto-detected the identity and acquired tokens automatically. The Python worker, however, crashed on startup complaining about missing passwords. I assumed `psycopg` would handle token injection similarly to EF Core, but Python's raw `psycopg` connection requires the `PRISM_DB_USERNAME` to be explicitly set to the Entra principal name. The fix taught me that cross-language orchestration on Azure requires understanding exactly where the identity abstractions stop. We ported the fix by passing explicit `AddAzureUserAssignedIdentity` parameters down to the Python worker containers in our AppHost.
             </p>
           </section>
 
@@ -123,7 +123,7 @@ export default function BlogPost() {
           <section className="space-y-4">
             <h2 className="text-2xl font-bold font-mono text-zinc-900 dark:text-zinc-100 mt-12 mb-4">What's Next</h2>
             <p>
-              Our roadmap is focused on stability and expanding rigor. We are prioritizing Entra ID authentication rollout and React UI deployment pipeline cleanup for v1.0.1. After that, we'll extend the golden eval harness with completely held-out, post-training-cutoff papers to ensure our refusal rates generalize and aren't benefiting from memorization. Down the line, we plan to explore multi-paper synthesis to audit claims consistently across the broader literature.
+              Our roadmap is focused on stability and expanding rigor. We are prioritizing user-facing Entra ID login rollout (distinct from our completed database auth) and React UI deployment pipeline cleanup for v1.0.1. After that, we'll extend the golden eval harness with completely held-out, post-training-cutoff papers to ensure our refusal rates generalize and aren't benefiting from memorization. Down the line, we plan to explore multi-paper synthesis to audit claims consistently across the broader literature.
             </p>
           </section>
 

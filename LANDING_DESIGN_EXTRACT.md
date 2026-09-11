@@ -196,7 +196,7 @@ This document provides a read-only audit and extraction of the design system val
 <p className="text-[17px] md:text-[18px] text-zinc-600">{content.howItWorks.subhead}</p>
 ```
 
-### 10/14 Stat (`src/components/sections/stats-section.tsx`)
+### 11/14 Stat (`src/components/sections/stats-section.tsx`)
 ```tsx
 <div className="font-mono text-[80px] md:text-[120px] font-bold leading-none tracking-tighter mb-4 text-center inline-block">
   <span className="text-amber-500">{content.stats.mainNumberParts[0]}</span>
@@ -344,7 +344,7 @@ This document provides a read-only audit and extraction of the design system val
 ```css
 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-rose-500
 ```
-*(Note: The 10/14 stat explicitly does not use a single background-clip gradient, but instead splits individual numbers into different span colors `text-amber-500`, `text-orange-500`, and `text-rose-500`).*
+*(Note: The 11/14 stat explicitly does not use a single background-clip gradient, but instead splits individual numbers into different span colors `text-amber-500`, `text-orange-500`, and `text-rose-500`).*
 
 ### Radial Background Glow
 *Found in `src/components/sections/hero-section.tsx:11`*

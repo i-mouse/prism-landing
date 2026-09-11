@@ -16,8 +16,11 @@ export function StatsSection() {
           <span className="text-orange-500 mx-2 md:mx-3">{content.stats.mainNumberParts[1]}</span>
           <span className="text-rose-500">{content.stats.mainNumberParts[2]}</span>
         </div>
-        <p className="text-[14px] md:text-[15px] text-muted-foreground font-mono mb-12 max-w-lg mx-auto">
+        <p className="text-[14px] md:text-[15px] text-muted-foreground font-mono mb-3 max-w-lg mx-auto">
           {content.stats.subtext}
+        </p>
+        <p className="text-[12px] md:text-[13px] text-muted-foreground font-mono mb-12 max-w-lg mx-auto opacity-80">
+          {content.stats.breakdown}
         </p>
         
         <div className="w-full max-w-3xl mx-auto border-t border-border pt-10 mb-8">
