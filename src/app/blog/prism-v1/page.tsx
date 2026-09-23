@@ -18,6 +18,8 @@ export default function BlogPost() {
           </h1>
           <div className="flex items-center gap-4 text-zinc-500 font-mono text-sm">
             <time dateTime="2026-09-03">September 3, 2026</time>
+            <span>·</span>
+            <span>Updated <time dateTime="2026-09-23">September 23</time></span>
           </div>
         </header>
 
@@ -78,14 +80,67 @@ export default function BlogPost() {
               <p>NOT SUPPORTED. Prism correctly catches that the abstract's broad superiority claim is refuted by the specific results table, and refuses to affirm it.</p>
             </div>
             <p>
-              Our correct-refusal rate on these traps is <strong>11/14 (79%) refusal-family</strong>. This breaks down as 5 explicit <strong>by_label</strong> refusals, 6 <strong>by_omission</strong> (extractor never surfaced the trap), and 0 <strong>by_grounding_reject</strong>. Of the explicit refusals, <strong>3/14 (21%)</strong> are strict-label matches that landed on the exact expected tier. Both numbers matter: 79% is our safety property, while the gap to 21% represents ongoing work to make refusals precise instead of accidental.
+              Across two live runs on September 23 against the production Azure Postgres database, with all three papers extracted, our correct-refusal rate on these traps was <strong>12/14 (86%) refusal-family</strong> in both runs. Run 1 broke down as 6 explicit <strong>by_label</strong> refusals, 4 <strong>by_omission</strong> (extractor never surfaced the trap), and 2 <strong>by_grounding_reject</strong>; Run 2 as 5 / 5 / 2. In both runs, <strong>4/14 (29%)</strong> were strict-label matches that landed on the exact expected tier. Both numbers matter: 86% is our safety property, while the gap to 29% represents ongoing work to make refusals precise instead of accidental.
             </p>
             <p>
               This evaluation suite acts as a strict CI gate for the repository. Any prompt, model, or retrieval change runs against this golden set before and after. A single grounding-negative FAIL blocks the change. 
             </p>
             <p>
-              This discipline matters because it actively prevents tuning-to-pass—the failure mode of most LLM evaluations where coverage and positive hits are bought at the expense of correct refusal. It is trivially easy to make an LLM extract more claims by widening its extraction prompt. But doing so usually causes the grounder to become more permissive, letting unsupported claims slip through. By locking our CI to the correct-refusal metric, we guarantee that coverage improvements never come at the cost of the system's core integrity. 
+              This discipline matters because it actively prevents tuning-to-pass—the failure mode of most LLM evaluations where coverage and positive hits are bought at the expense of correct refusal. It is trivially easy to make an LLM extract more claims by widening its extraction prompt. But doing so usually causes the grounder to become more permissive, letting unsupported claims slip through. By locking our CI to the correct-refusal metric, we guarantee that coverage improvements never come at the cost of the system's core integrity.
             </p>
+          </section>
+
+          {/* 4b. Two runs, and what the numbers don't say */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold font-mono text-zinc-900 dark:text-zinc-100 mt-12 mb-4">Two Runs, and What the Numbers Don't Say</h2>
+            <div className="bg-zinc-100 dark:bg-zinc-900 p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 font-mono text-sm my-6 overflow-x-auto">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="text-zinc-500">
+                    <th className="pr-4 pb-2 font-bold">Metric</th>
+                    <th className="pr-4 pb-2 font-bold">Run 1 (10:42Z)</th>
+                    <th className="pb-2 font-bold">Run 2 (11:22Z)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td className="pr-4 py-1">Refusal-family</td><td className="pr-4">12/14 (86%)</td><td>12/14 (86%)</td></tr>
+                  <tr><td className="pr-4 py-1">label / omission / grounding</td><td className="pr-4">6 / 4 / 2</td><td>5 / 5 / 2</td></tr>
+                  <tr><td className="pr-4 py-1">Strict-label</td><td className="pr-4">4/14 (29%)</td><td>4/14 (29%)</td></tr>
+                  <tr><td className="pr-4 py-1">Positive hits</td><td className="pr-4">14/23 (61%)</td><td>15/23 (65%)</td></tr>
+                  <tr><td className="pr-4 py-1">False rejection</td><td className="pr-4">0/23 (0%)</td><td>0/23 (0%)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              "Refusal-family" counts a trap as correctly handled if Prism did not affirm it, and there are three different ways that can happen. A <strong>by_label</strong> refusal means the auditor read the claim against the paper and reasoned to <code>partially_supported</code> or <code>not_supported</code>. That is the product working as designed. A <strong>by_omission</strong> refusal means the extractor never surfaced the claim at all, so it was never affirmed, but it was never flagged either. The user sees nothing. A <strong>by_grounding_reject</strong> means the auditor affirmed the claim, but the downstream grounding checker failed its cited evidence, so it is not shown as supported. Only the first is a refusal the user can actually read. The 86% is a safety floor; the by_label count is the number that has to grow.
+            </p>
+            <p>
+              The number I watch most closely is the false-rejection rate: 0/23 in both runs. Across every positive claim in the golden set, Prism never told a user that a supported claim was unsupported. A refusal-first system has an obvious degenerate solution, which is to refuse everything. A 0% false-rejection rate is the evidence that the refusals come from reading the paper, not from a bias toward saying no.
+            </p>
+            <p>
+              I'm reporting both runs rather than the better one because they differ. The refusal rate, strict-label rate, and false-rejection rate were identical across both. Positive hits moved from 14/23 to 15/23. The eval matcher that pairs golden rows with extracted claims is itself an LLM call, and it is not perfectly deterministic. Inside the refusal breakdown, one trap claim shifted from by_label to by_omission between runs; the total held at 12. A single run would have hidden that variance, so the honest figure is a range: 61–65% positive hits, 86% refusal-family.
+            </p>
+
+            <h3 className="text-xl font-bold font-mono text-zinc-800 dark:text-zinc-200 mt-8 mb-2">Known Limitations</h3>
+            <ul className="list-disc pl-6 space-y-4">
+              <li>
+                {/* TODO: replace with the confirmed react.pdf ALFWorld example (exact specifics pending) */}
+                <strong>RapidFuzz vs. table citations.</strong> Grounding starts with a lexical RapidFuzz match between the cited quote and the paper text. PDF parsing flattens tables, losing layout and spacing, so a correct quote from a results table can fail the lexical stage even when the auditor cited the right numbers. The react.pdf ALFWorld results are the confirmed case.
+              </li>
+              <li>
+                {/* TODO: replace with the confirmed reflexion.pdf claim 7 example (exact specifics pending) */}
+                <strong>Scope-tightening is blunt on definitional claims.</strong> The auditor requires evidence from experimental results, data, or proofs, not just a restatement in the Abstract or Introduction. That rule catches generalization traps, but it also penalizes claims that are definitional, where the paper describing its own method is the evidence. Reflexion claim 7 is the confirmed case.
+              </li>
+              <li>
+                <strong><code>stance: refutes</code> has never been observed.</strong> The span-level grounding audit emits a stance (supports / refutes / neutral) for each evidence span. Across 200+ grounded spans in the production database, confirmed by direct query, the count of <code>refutes</code> is zero. Nothing downstream consumes stance yet, so this does not affect any label or number above. But until it fires at least once on a genuinely contradicting quote, the field is not a trustworthy signal.
+              </li>
+              <li>
+                <strong>PDF ligature mojibake.</strong> PyMuPDF sometimes emits ligature glyphs (ﬁ, ﬂ) in place of the letters they represent, which breaks exact string matching. The eval matcher normalizes these with NFKC; the grounding stage does not.
+              </li>
+              <li>
+                <strong>No held-out paper yet.</strong> Reflexion, Chain-of-Thought, and ReAct are well known and almost certainly in the model's training data. Some correct refusals may reflect memorization rather than reading. A held-out, post-training-cutoff paper with sealed golden rows is the fix, and it is not built yet. Fourteen negative cases is a seed probe, not a benchmark.
+              </li>
+            </ul>
           </section>
 
           {/* 5. Three things that broke */}

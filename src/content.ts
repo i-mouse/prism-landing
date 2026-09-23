@@ -61,11 +61,11 @@ export const content = {
     { title: "Prism", desc: "Audits the paper you're already reading.", type: "brand" }
   ],
   stats: {
-    mainNumberParts: ["11", " / ", "14"],
-    subtext: "correct-refusal rate on adversarial cases.",
-    breakdown: "5 by_label · 6 by_omission · 0 by_grounding_reject (3 strict-label)",
+    mainNumberParts: ["12", " / ", "14"],
+    subtext: "correct-refusal rate on adversarial cases, identical across two live runs.",
+    breakdown: "6 / 5 by_label · 4 / 5 by_omission · 2 by_grounding_reject (4 strict-label)",
     metrics: [
-      "11 / 23    positive hits",
+      "14–15 / 23 positive hits",
       "0 / 23     false rejections",
       "37         hand-authored golden rows across 3 papers"
     ],
@@ -120,7 +120,7 @@ export const content = {
     subhead: "Prism is designed with strict boundaries to ensure the integrity of the audit.",
     blocks: [
       "The three eval papers are well known and likely in the model's training data. Correct refusal here may partly reflect memorisation. A held-out post-cutoff paper with sealed rows is the fix.",
-      "The 79% refusal-family rate is a safety property: the system successfully avoided affirming 11 out of 14 false claims. However, only 21% (3/14) achieved a strict-label match on the exact expected tier. Closing the gap between simply avoiding false claims (including by omission) and explicitly reasoning to the precise tier is the focus of ongoing work (v4.1 extractor iteration).",
+      "The 86% refusal-family rate is a safety property: the system avoided affirming 12 out of 14 false claims in both live runs. However, only 29% (4/14) achieved a strict-label match on the exact expected tier. Closing the gap between simply avoiding false claims (including by omission) and explicitly reasoning to the precise tier is the focus of ongoing work.",
       "Fourteen negative cases is a seed probe, not a benchmark."
     ]
   },
