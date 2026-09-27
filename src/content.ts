@@ -3,8 +3,8 @@ export const content = {
     logo: "Prism",
     links: [
       { label: "How it works", href: "#how-it-works" },
-      { label: "Live audit", href: "#live-audit" },
       { label: "Limitations", href: "#limitations" },
+      { label: "Blog", href: "/blog/prism-v2" },
       { label: "GitHub", href: "https://github.com/i-mouse/prism" },
     ],
     cta: "Audit a paper — no account"
@@ -128,23 +128,17 @@ export const content = {
     {
       icon: "code",
       eyebrow: "BUILT FOR CORRECT-REFUSAL",
-      heading: "Every prompt change runs against 14 adversarial cases in CI. We ship when the number holds.",
-      linkText: "See the eval harness →",
-      linkHref: "https://github.com/i-mouse/prism/tree/main/docs/evals"
+      heading: "Every prompt change runs against 14 adversarial cases in CI. We ship when the number holds."
     },
     {
       icon: "network",
       eyebrow: "THREE-CALL ARCHITECTURE",
-      heading: "Extractor → Auditor → Structurer. Separation of concerns. Observable. Reliable.",
-      linkText: "Read the engineering blog →",
-      linkHref: "https://github.com/i-mouse/prism"
+      heading: "Extractor → Auditor → Structurer. Separation of concerns. Observable. Reliable."
     },
     {
       icon: "github",
       eyebrow: "OPEN & REPRODUCIBLE",
-      heading: "Prompts, evals, and results are public.",
-      linkText: "View on GitHub →",
-      linkHref: "https://github.com/i-mouse/prism"
+      heading: "Prompts, evals, and results are public."
     }
   ],
   footer: {
@@ -155,6 +149,7 @@ export const content = {
         title: "Navigation", 
         links: [
           { label: "Home", href: "#top" },
+          { label: "Blog", href: "/blog/prism-v2" },
           { label: "Git Prism repo", href: "https://github.com/i-mouse/prism" },
           { label: "Live App", href: "https://prism-ai-reactui.nicesky-c6f0b846.centralindia.azurecontainerapps.io/" }
         ] 

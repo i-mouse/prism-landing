@@ -48,9 +48,6 @@ export function FooterSection() {
               <div className="flex flex-col">
                 <span className="text-cyan-700 dark:text-cyan-400 text-[13px] md:text-[14px] font-mono tracking-widest uppercase mb-3">{item.eyebrow}</span>
                 <p className="text-muted-foreground text-[13px] leading-relaxed mb-6 font-mono">{item.heading}</p>
-                <a href={item.linkHref} className="font-mono text-[13px] text-red-600 dark:text-red-500 border-b border-red-600/30 dark:border-red-500/30 pb-0.5 self-start hover:text-red-500 dark:hover:text-red-400 transition-colors">
-                  {item.linkText}
-                </a>
               </div>
             </div>
           ))}
